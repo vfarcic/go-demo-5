@@ -4,35 +4,29 @@ def props
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
 
-podTemplate(
-  label: label,
-  namespace: "go-demo-3-build", // Not allowed with declarative
-  serviceAccount: "build",
-  yaml: """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: helm
-    image: vfarcic/helm:2.9.1
-    command: ["cat"]
-    tty: true
-    volumeMounts:
-    - name: build-config
-      mountPath: /etc/config
-  - name: kubectl
-    image: vfarcic/kubectl
-    command: ["cat"]
-    tty: true
-  - name: golang
-    image: golang:1.9
-    command: ["cat"]
-    tty: true
-  volumes:
-  - name: build-config
-    configMap:
-      name: build-config
-"""
+// namespace: "go-demo-3-build", // Not allowed with declarative
+// serviceAccount: "build",
+
+pipeline {
+  agent {
+    go-demo-3 {
+      label "${label}"
+      yamlFile "KubernetesPod.yaml"
+    }      
+  }
+  stages {
+    stage("test") {
+      steps {
+        container("helm") {
+          sh "Hello!!!"
+        }
+      }
+    }
+  }
+}
+
+
+
 ) {
   node(label) {
     stage("build") {
