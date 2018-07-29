@@ -44,7 +44,7 @@ pipeline {
       post {
         failure {
           container("helm") {
-            k8sDeleteBeta(props.project)
+            k8sDeleteBeta(project)
           }
         }
       }
