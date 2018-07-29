@@ -10,8 +10,8 @@
 pipeline {
   agent {
     kubernetes {
-      label "${label}"
-      yamlFile: KubernetesPod.yaml
+      label "my-pod"
+      yamlFile "KubernetesPod.yaml"
     }      
   }
   environment {
