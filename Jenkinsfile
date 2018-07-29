@@ -42,7 +42,7 @@ pipeline {
         }
       }
       post {
-        failure {
+        always {
           container("helm") {
             k8sDeleteBeta(project)
           }
