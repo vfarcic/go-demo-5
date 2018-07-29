@@ -1,4 +1,4 @@
-// import java.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 
 // currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
 
@@ -27,6 +27,9 @@ pipeline {
     stage("build") {
       steps {
         container("docker") {
+          script {
+            currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-${env.BUILD_NUMBER}"
+          }
           k8sBuildImageBeta(image)
         }
       }
