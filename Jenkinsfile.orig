@@ -7,8 +7,8 @@ pipeline {
   }
   agent {
     kubernetes {
-      cloud "go-demo-5"
-      label "go-demo-5"
+      cloud "go-demo-5-build"
+      label "go-demo-5-build"
       yamlFile "KubernetesPod.yaml"
     }      
   }
@@ -42,7 +42,7 @@ pipeline {
         }
       }
       post {
-        failure {
+        always {
           container("helm") {
             k8sDeleteBeta(project)
           }
