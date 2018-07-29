@@ -58,7 +58,7 @@ pipeline {
           k8sPushImage(image, false)
         }
         container("helm") {
-          k8sPushHelm(project, "", cmAddr, true)
+          k8sPushHelm(project, "", cmAddr, true, true)
         }
       }
     }
