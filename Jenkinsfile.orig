@@ -12,6 +12,12 @@ pipeline {
       yamlFile "KubernetesPod.yaml"
     }      
   }
+  environment {
+    image = "vfarcic/go-demo-5"
+    project = "go-demo-5"
+    domain = "acme.com"
+    cmAddr = "cm.acme.com"
+  }
   stages {
     stage("build") {
       steps {
