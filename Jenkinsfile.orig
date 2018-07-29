@@ -1,29 +1,24 @@
 import java.text.SimpleDateFormat
 
-def props
-def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
-
-// TODO: namespace: "go-demo-5-build", // Not allowed with declarative
-// TODO: serviceAccount: "build",
-
 pipeline {
-  agent {
-    go-demo-5 {
-      label "${label}"
-      yamlFile: KubernetesPod.yaml
-    }      
+  options {
+    buildDiscarder logRotator(numToKeepStr: '5')
+    disableConcurrentBuilds()
   }
-  environment {
-    image = "vfarcic/go-demo-5"
-    project = "go-demo-5"
-    domain = "acme.com"
-    cmAddr = "cm.acme.com"
+  agent {
+    kubernetes {
+      cloud "go-demo"
+      label "go-demo-5"
+      yamlFile "KubernetesPod.yaml"
+    }      
   }
   stages {
     stage("build") {
       steps {
         container("docker") {
+          script {
+            currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-${env.BUILD_NUMBER}"
+          }
           k8sBuildImageBeta(image)
         }
       }

@@ -1,10 +1,5 @@
 import java.text.SimpleDateFormat
 
-// currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
-
-// // TODO: namespace: "go-demo-5-build", // Not allowed with declarative
-// // TODO: serviceAccount: "build",
-
 pipeline {
   options {
     buildDiscarder logRotator(numToKeepStr: '5')
@@ -12,16 +7,10 @@ pipeline {
   }
   agent {
     kubernetes {
-      cloud "go-demo-5"
+      cloud "go-demo"
       label "go-demo-5"
       yamlFile "KubernetesPod.yaml"
     }      
-  }
-  environment {
-    image = "vfarcic/go-demo-5"
-    project = "go-demo-5"
-    domain = "192.168.0.189.nip.io"
-    cmAddr = "cm.192.168.0.189.nip.io"
   }
   stages {
     stage("build") {
@@ -49,7 +38,7 @@ pipeline {
       post {
         failure {
           container("helm") {
-            k8sDeleteBeta(project)
+            k8sDeleteBeta(props.project)
           }
         }
       }
