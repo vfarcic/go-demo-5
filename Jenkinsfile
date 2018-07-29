@@ -1,13 +1,15 @@
 // import java.text.SimpleDateFormat
 
-// def props
-// def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 // currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
 
 // // TODO: namespace: "go-demo-5-build", // Not allowed with declarative
 // // TODO: serviceAccount: "build",
 
 pipeline {
+  options {
+    buildDiscarder logRotator(numToKeepStr: '5')
+    disableConcurrentBuilds()
+  }
   agent {
     kubernetes {
       cloud "go-demo-5"
@@ -44,7 +46,7 @@ pipeline {
       post {
         failure {
           container("helm") {
-            k8sDeleteBeta(props.project)
+            k8sDeleteBeta(project)
           }
         }
       }
