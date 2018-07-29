@@ -25,7 +25,7 @@ pipeline {
           script {
             currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-${env.BUILD_NUMBER}"
           }
-          k8sBuildImageBeta(image)
+          k8sBuildImageBeta(image, false)
         }
       }
     }
@@ -55,7 +55,7 @@ pipeline {
       }
       steps {
         container("docker") {
-          k8sPushImage(image)
+          k8sPushImage(image, false)
         }
         container("helm") {
           k8sPushHelm(project, "", cmAddr)
