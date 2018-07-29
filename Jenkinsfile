@@ -7,7 +7,7 @@ pipeline {
   }
   agent {
     kubernetes {
-      cloud "go-demo"
+      cloud "go-demo-5"
       label "go-demo-5"
       yamlFile "KubernetesPod.yaml"
     }      
