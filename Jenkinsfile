@@ -1,8 +1,8 @@
-import java.text.SimpleDateFormat
+// import java.text.SimpleDateFormat
 
-def props
-def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
+// def props
+// def label = "jenkins-slave-${UUID.randomUUID().toString()}"
+// currentBuild.displayName = new SimpleDateFormat("yy.MM.dd").format(new Date()) + "-" + env.BUILD_NUMBER
 
 // // TODO: namespace: "go-demo-5-build", // Not allowed with declarative
 // // TODO: serviceAccount: "build",
