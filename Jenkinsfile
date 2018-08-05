@@ -37,9 +37,9 @@ pipeline {
         container("kubectl") {
           k8sRolloutBeta(project)
         }
-        container("golang") {
+        // container("golang") {
         //   k8sFuncTestGolang(project, domain)
-        }
+        // }
       }
       post {
         always {
