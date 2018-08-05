@@ -38,7 +38,7 @@ pipeline {
           k8sRolloutBeta(project)
         }
         container("golang") {
-          k8sFuncTestGolang(project, domain)
+        //   k8sFuncTestGolang(project, domain)
         }
       }
       post {
