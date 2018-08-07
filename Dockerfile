@@ -1,12 +1,3 @@
-FROM golang:1.9 AS build
-ADD . /src
-WORKDIR /src
-RUN go get -d -v -t
-RUN go test --cover -v ./... --run UnitTest
-RUN go build -v -o go-demo
-
-
-
 FROM alpine:3.4
 MAINTAINER 	Viktor Farcic <viktor@farcic.com>
 
@@ -16,5 +7,5 @@ EXPOSE 8080
 ENV DB db
 CMD ["go-demo"]
 
-COPY --from=build /src/go-demo /usr/local/bin/go-demo
+COPY go-demo /usr/local/bin/go-demo
 RUN chmod +x /usr/local/bin/go-demo
