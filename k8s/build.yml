@@ -61,5 +61,5 @@ spec:
     requests.cpu: 2
     requests.memory: 3Gi
     limits.cpu: 3
-    limits.memory: 4Gi
+    limits.memory: 5Gi
     pods: 15
