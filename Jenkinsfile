@@ -10,7 +10,7 @@ pipeline {
       cloud "go-demo-5-build"
       label "go-demo-5-build"
       serviceAccount "build"
-      yamlFile "KubernetesPod.yaml"
+      yamlFile "KubernetesPod-oc.yaml"
     }      
   }
   environment {
@@ -37,6 +37,9 @@ pipeline {
       steps {
         container("helm") {
           k8sUpgradeBeta(project, domain, "--set replicaCount=2 --set dbReplicaCount=1")
+        }
+        container("oc") {
+          ocCreateEdgeRouteBuild(project, domain)
         }
         container("kubectl") {
           k8sRolloutBeta(project)
