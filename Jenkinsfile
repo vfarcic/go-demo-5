@@ -16,8 +16,8 @@ pipeline {
   environment {
     image = "vfarcic/go-demo-5"
     project = "go-demo-5"
-    domain = "35.237.218.235.nip.io"
-    cmAddr = "cm.35.237.218.235.nip.io"
+    domain = "34.210.146.155.nip.io"
+    cmAddr = "cm.34.210.146.155.nip.io"
   }
   stages {
     stage("build") {
