@@ -10,14 +10,14 @@ pipeline {
       cloud "go-demo-5-build"
       label "go-demo-5-build"
       serviceAccount "build"
-      yamlFile "KubernetesPod-oc.yaml"
+      yamlFile "KubernetesPod.yaml"
     }      
   }
   environment {
     image = "vfarcic/go-demo-5"
     project = "go-demo-5"
-    domain = "192.168.99.100.nip.io"
-    cmAddr = "cm.192.168.99.100.nip.io"
+    domain = "35.237.218.235.nip.io"
+    cmAddr = "cm.35.237.218.235.nip.io"
   }
   stages {
     stage("build") {
@@ -37,9 +37,6 @@ pipeline {
       steps {
         container("helm") {
           k8sUpgradeBeta(project, domain, "--set replicaCount=2 --set dbReplicaCount=1")
-        }
-        container("oc") {
-          ocCreateEdgeRouteBuild(project, domain)
         }
         container("kubectl") {
           k8sRolloutBeta(project)
