@@ -27,12 +27,12 @@ spec:
           value: {{ template "helm.fullname" . }}-db
         readinessProbe:
           httpGet:
-            path: /demo/hello
+            path: /demo/hello?health=true
             port: 8080
           periodSeconds: 1
         livenessProbe:
           httpGet:
-            path: /demo/hello
+            path: /demo/hello?health=true
             port: 8080
         resources:
 {{ toYaml .Values.resources | indent 10 }}
