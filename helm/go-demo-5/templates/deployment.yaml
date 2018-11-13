@@ -7,6 +7,11 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    kube-monkey/enabled: "{{ .Values.kubemonkey.enable }}"
+    kube-monkey/identifier: {{ template "helm.name" . }}
+    kube-monkey/mtbf: "{{ .Values.kubemonkey.mtbf }}"
+    kube-monkey/kill-mode: "{{ .Values.kubemonkey.killmode }}"
+    kube-monkey/kill-value: "{{ .Values.kubemonkey.killvalue }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -18,6 +23,11 @@ spec:
       labels:
         app: {{ template "helm.name" . }}
         release: {{ .Release.Name }}
+        kube-monkey/enabled: "{{ .Values.kubemonkey.enable }}"
+        kube-monkey/identifier: {{ template "helm.name" . }}
+        kube-monkey/mtbf: "{{ .Values.kubemonkey.mtbf }}"
+        kube-monkey/kill-mode: "{{ .Values.kubemonkey.killmode }}"
+        kube-monkey/kill-value: "{{ .Values.kubemonkey.killvalue }}"
     spec:
       containers:
       - name: api
