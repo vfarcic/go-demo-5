@@ -10,7 +10,7 @@ metadata:
     kube-monkey/enabled: "{{ .Values.kubemonkey.enabled }}"
     kube-monkey/identifier: {{ template "helm.name" . }}
     kube-monkey/mtbf: "{{ .Values.kubemonkey.mtbf }}"
-    kube-monkey/kill-mode: '{{ index .Values "kubemonkey" "kill-mode" }}'
+    kube-monkey/kill-mode: '{{ index .Values "kubemonkey" "kill-mode" }}' # index needs to used due to "-" in the values yaml
     kube-monkey/kill-value: '{{ index .Values "kubemonkey" "kill-value" }}'
 spec:
   replicas: {{ .Values.replicaCount }}
