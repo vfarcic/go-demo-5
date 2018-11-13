@@ -37,7 +37,7 @@ dbPersistence:
   size: 2Gi
 # refer to https://github.com/asobti/kube-monkey for details
 kubemonkey:
-  enabled: "enabled" # to disable set this to "disabled"
+  enabled: "disabled" # to disable set this to "disabled", to enable set it to "enabled" 
   mtbf: 1
   kill-mode: "fixed"
   kill-value: "1"
