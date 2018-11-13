@@ -7,11 +7,11 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    kube-monkey/enabled: "{{ .Values.kubemonkey.enable }}"
+    kube-monkey/enabled: "{{ .Values.kubemonkey.enabled }}"
     kube-monkey/identifier: {{ template "helm.name" . }}
     kube-monkey/mtbf: "{{ .Values.kubemonkey.mtbf }}"
-    kube-monkey/kill-mode: "{{ .Values.kubemonkey.killmode }}"
-    kube-monkey/kill-value: "{{ .Values.kubemonkey.killvalue }}"
+    kube-monkey/kill-mode: '{{ index .Values "kubemonkey" "kill-mode" }}'
+    kube-monkey/kill-value: '{{ index .Values "kubemonkey" "kill-value" }}'
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -23,11 +23,11 @@ spec:
       labels:
         app: {{ template "helm.name" . }}
         release: {{ .Release.Name }}
-        kube-monkey/enabled: "{{ .Values.kubemonkey.enable }}"
+        kube-monkey/enabled: "{{ .Values.kubemonkey.enabled }}"
         kube-monkey/identifier: {{ template "helm.name" . }}
         kube-monkey/mtbf: "{{ .Values.kubemonkey.mtbf }}"
-        kube-monkey/kill-mode: "{{ .Values.kubemonkey.killmode }}"
-        kube-monkey/kill-value: "{{ .Values.kubemonkey.killvalue }}"
+        kube-monkey/kill-mode: '{{ index .Values "kubemonkey" "kill-mode" }}'
+        kube-monkey/kill-value: '{{ index .Values "kubemonkey" "kill-value" }}'
     spec:
       containers:
       - name: api
