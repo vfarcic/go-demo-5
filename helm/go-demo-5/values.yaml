@@ -24,7 +24,7 @@ dbResources:
     cpu: 100m
   requests:
     memory: 100Mi
-    cpu: 5m
+    cpu: 10m
 dbPersistence:
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
