@@ -14,7 +14,7 @@ rbac:
 resources:
   limits:
    cpu: 15m
-   memory: 10Mi
+   memory: 15Mi
   requests:
    cpu: 5m
    memory: 5Mi
